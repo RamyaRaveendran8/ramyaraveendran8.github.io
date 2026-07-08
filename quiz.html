@@ -13,9 +13,17 @@
         button { width: 100%; padding: 15px; background-color: #0056b3; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
         button:hover { background-color: #004494; }
         
-        /* New Styling for Option Buttons */
-        .option-btn { background-color: #e9ecef; color: #333; text-align: left; border: 2px solid transparent; }
+        /* Updated Styling for Option Buttons to remove mobile tap highlights */
+        .option-btn { 
+            background-color: #e9ecef; 
+            color: #333; 
+            text-align: left; 
+            border: 2px solid transparent; 
+            -webkit-tap-highlight-color: transparent; /* Kills the default mobile blue flash */
+            outline: none; /* Kills the browser focus ring */
+        }
         .option-btn:active { background-color: #d3d9df; }
+        .option-btn:focus { outline: none; }
         
         /* The Light Cyan Highlight */
         .option-btn.selected { 
@@ -71,7 +79,7 @@
     let timerInterval;
     let studentData = {};
     let quizId = "unknown_quiz";
-    let selectedAnswer = null; // Tracks their choice before hitting Next
+    let selectedAnswer = null; 
 
     // --- INITIALIZATION ---
     window.onload = function() {
@@ -116,10 +124,11 @@
             return;
         }
 
-        // 1. Reset the previous selection and colors
+        // 1. Reset the previous selection, colors, and browser focus
         selectedAnswer = null;
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.classList.remove('selected');
+            btn.blur(); // Forces the mobile browser to drop the "tapped" state
         });
 
         // 2. Load text
@@ -149,17 +158,13 @@
             timeLeft--;
             document.getElementById('time-left').innerText = timeLeft;
             if (timeLeft <= 0) {
-                // If time runs out, auto-submit whatever they had selected
                 submitAnswerAndProceed();
             }
         }, 1000);
     }
 
     function selectOption(letter, btnId) {
-        // Record their choice but DO NOT clear the timer yet
         selectedAnswer = letter;
-
-        // Visually clear all buttons, then highlight the clicked one in cyan
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
@@ -167,9 +172,8 @@
     }
 
     function submitAnswerAndProceed() {
-        clearInterval(timerInterval); // Stop timer immediately
+        clearInterval(timerInterval); 
         
-        // Check if what they had selected was right
         if (selectedAnswer !== null) {
             const correctLetter = questions[currentQuestionIndex].correct;
             if (selectedAnswer === correctLetter) {
@@ -177,7 +181,6 @@
             }
         }
         
-        // Move forward
         currentQuestionIndex++;
         loadQuestion();
     }
