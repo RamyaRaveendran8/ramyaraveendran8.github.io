@@ -1,5 +1,6 @@
 [
   {
+    "id": "q1",
     "question": "A potential threat to human life, property, or the environment, such as heavy rainfall in the Western Ghats, is termed as a:",
     "a": "Disaster",
     "b": "Hazard",
@@ -8,6 +9,7 @@
     "correct": "b"
   },
   {
+    "id": "q2",
     "question": "Which term describes a hazard event that has actually occurred and caused widespread disruption, exceeding the affected community's ability to cope?",
     "a": "Emergency",
     "b": "Exposure",
@@ -16,6 +18,7 @@
     "correct": "c"
   },
   {
+    "id": "q3",
     "question": "In the context of disaster management, 'Vulnerability' refers to:",
     "a": "The physical presence of people in a hazard zone",
     "b": "The probability of a hazard occurring",
@@ -24,6 +27,7 @@
     "correct": "c"
   },
   {
+    "id": "q4",
     "question": "The immediate provision of basic needs like food, water, and medical aid to a community in Alappuzha right after a flood is known as:",
     "a": "Mitigation",
     "b": "Relief",
@@ -32,6 +36,7 @@
     "correct": "b"
   },
   {
+    "id": "q5",
     "question": "Building coastal sea-walls in Thiruvananthapuram to prevent future coastal erosion is an example of:",
     "a": "Response",
     "b": "Preparedness",
@@ -40,6 +45,7 @@
     "correct": "c"
   },
   {
+    "id": "q6",
     "question": "'Exposure' is best defined as:",
     "a": "The inability to resist a hazard",
     "b": "The elements at risk (people, property, systems) present in hazard zones",
@@ -48,6 +54,7 @@
     "correct": "b"
   },
   {
+    "id": "q7",
     "question": "A situation that requires immediate action to prevent a worsening situation, such as a localized fire in a chemical plant in Kochi, is an:",
     "a": "Emergency",
     "b": "Capacity",
@@ -56,6 +63,7 @@
     "correct": "a"
   },
   {
+    "id": "q8",
     "question": "The ability of a community in Kerala to anticipate, cope with, resist, and bounce back from the impact of a disaster is called:",
     "a": "Vulnerability",
     "b": "Relief",
@@ -64,6 +72,7 @@
     "correct": "c"
   },
   {
+    "id": "q9",
     "question": "Conducting mock drills for earthquake evacuation in an engineering college is an activity belonging to:",
     "a": "Mitigation",
     "b": "Preparedness",
@@ -72,6 +81,7 @@
     "correct": "b"
   },
   {
+    "id": "q10",
     "question": "What is the standard conceptual formula for calculating Disaster Risk?",
     "a": "Risk = Hazard + Vulnerability - Capacity",
     "b": "Risk = (Hazard × Vulnerability × Exposure) / Capacity",
@@ -80,6 +90,7 @@
     "correct": "b"
   },
   {
+    "id": "q11",
     "question": "During the 2018 Kerala floods, many local fishermen used their own boats to rescue stranded people. In disaster management terminology, the availability and use of these boats represents the community's:",
     "a": "Exposure",
     "b": "Capacity",
@@ -88,6 +99,7 @@
     "correct": "b"
   },
   {
+    "id": "q12",
     "question": "A BTech student is analyzing a settlement in Munnar. She notes that houses are built on steep, unstable slopes (Factor A), and that there are 500 families living there (Factor B). What do Factor A and Factor B represent?",
     "a": "Factor A is Exposure, Factor B is Hazard",
     "b": "Factor A is Vulnerability, Factor B is Exposure",
@@ -96,6 +108,7 @@
     "correct": "b"
   },
   {
+    "id": "q13",
     "question": "Which of the following differentiates 'Rehabilitation' from 'Relief'?",
     "a": "Relief is long-term economic support; Rehabilitation is immediate rescue.",
     "b": "Relief provides immediate life-saving support; Rehabilitation focuses on restoring livelihoods and basic services.",
@@ -104,6 +117,7 @@
     "correct": "b"
   },
   {
+    "id": "q14",
     "question": "An extreme weather warning is issued for Cyclone Ockhi. The government immediately deploys NDRF teams, activates emergency control rooms, and initiates evacuations. Which phase of the disaster management cycle is this?",
     "a": "Mitigation",
     "b": "Recovery",
@@ -112,6 +126,7 @@
     "correct": "c"
   },
   {
+    "id": "q15",
     "question": "A situation becomes a 'Crisis' rather than just an 'Emergency' when:",
     "a": "Local emergency services can easily handle the situation.",
     "b": "The situation is predictable and slow-moving.",
@@ -120,6 +135,7 @@
     "correct": "c"
   },
   {
+    "id": "q16",
     "question": "Upgrading the structural design of a bridge in Ernakulam so it can withstand a Level 3 earthquake is a form of structural ________.",
     "a": "Preparedness",
     "b": "Mitigation",
@@ -128,6 +144,7 @@
     "correct": "b"
   },
   {
+    "id": "q17",
     "question": "After a major landslide in Wayanad, the government decides to relocate the surviving families to a safer, flat terrain 20 km away permanently. This action reduces future disaster risk by directly reducing:",
     "a": "The hazard itself",
     "b": "The exposure",
@@ -136,6 +153,7 @@
     "correct": "b"
   },
   {
+    "id": "q18",
     "question": "What is the primary focus of the 'Recovery' phase?",
     "a": "Distributing food packets",
     "b": "Conducting hazard mapping",
@@ -144,6 +162,7 @@
     "correct": "c"
   },
   {
+    "id": "q19",
     "question": "India is highly prone to various hazards. Which of the following statements correctly applies disaster terminology to the Indian context?",
     "a": "The Himalayas are the Hazard; the earthquakes are the Vulnerability.",
     "b": "Coastal cyclones are a Hazard; dense populations on the eastern coast are the Exposure.",
@@ -152,6 +171,7 @@
     "correct": "b"
   },
   {
+    "id": "q20",
     "question": "If a civil engineering project successfully reduces a building's vulnerability to zero, what happens to the Disaster Risk for that specific building regarding that hazard?",
     "a": "Risk becomes infinite",
     "b": "Risk remains unchanged because the hazard still exists",
@@ -160,6 +180,7 @@
     "correct": "c"
   },
   {
+    "id": "q21",
     "question": "A BTech project proposes dredging the Pampa River to increase its water-carrying capacity and installing an automated flood-warning siren system. Which two disaster management concepts are being applied here, respectively?",
     "a": "Mitigation and Preparedness",
     "b": "Preparedness and Response",
@@ -168,6 +189,7 @@
     "correct": "a"
   },
   {
+    "id": "q22",
     "question": "Following the 2018 floods, the Kerala government initiated the Rebuild Kerala Initiative (RKI). RKI focuses on creating climate-resilient infrastructure rather than just repairing old roads to their previous state. This aligns most closely with which concept?",
     "a": "Short-term Relief",
     "b": "Build Back Better (Recovery/Resilience)",
@@ -176,6 +198,7 @@
     "correct": "b"
   },
   {
+    "id": "q23",
     "question": "You are assessing an old hospital in a seismic zone (Zone III in Kerala). The hospital has a high number of ICU patients who cannot be easily moved, and the building lacks seismic retrofitting. Which of the following statements is most accurate?",
     "a": "The hazard is high, but vulnerability is low.",
     "b": "The physical vulnerability is high, but the social capacity is high.",
@@ -184,6 +207,7 @@
     "correct": "c"
   },
   {
+    "id": "q24",
     "question": "In the aftermath of a severe cyclone in Gujarat, restoring the power grid took 3 weeks, paralyzing water supply and telecommunications. This cascading failure of interconnected infrastructure highlights a severe lack of:",
     "a": "Warning systems",
     "b": "Hazard identification",
@@ -192,6 +216,7 @@
     "correct": "c"
   },
   {
+    "id": "q25",
     "question": "A chemical factory in an industrial park in Palakkad has a minor toxic gas leak. The factory's internal alarms sound, and the leak is sealed within 15 minutes by their own safety team without affecting the public. This scenario is best classified as an:",
     "a": "Industrial Disaster",
     "b": "Unmitigated Risk",
@@ -200,6 +225,7 @@
     "correct": "c"
   },
   {
+    "id": "q26",
     "question": "Which scenario accurately differentiates 'Rehabilitation' from 'Recovery' in post-disaster civil engineering?",
     "a": "Rehabilitation is providing tents; Recovery is providing meals.",
     "b": "Rehabilitation is patching a damaged highway to allow immediate supply trucks; Recovery is redesigning and rebuilding the highway to a new standard over two years.",
@@ -208,6 +234,7 @@
     "correct": "b"
   },
   {
+    "id": "q27",
     "question": "Suppose the rainfall intensity in Kerala remains constant over the next decade (Hazard remains the same), but rapid urbanization leads to the filling up of wetlands (natural drainage) to build housing colonies. According to the risk equation, why does the flood risk increase?",
     "a": "The hazard frequency is increasing.",
     "b": "Capacity is increasing.",
@@ -216,6 +243,7 @@
     "correct": "c"
   },
   {
+    "id": "q28",
     "question": "An engineering firm is hired to conduct a 'Capacity Assessment' of a coastal panchayat in Kerala. Which of the following metrics would they NOT typically measure?",
     "a": "The number of functional cyclone shelters.",
     "b": "The frequency of high-tide flooding events per year.",
@@ -224,6 +252,7 @@
     "correct": "b"
   },
   {
+    "id": "q29",
     "question": "The concept of 'acceptable risk' in structural engineering implies that:",
     "a": "Buildings should be designed to be 100% indestructible to all hazards.",
     "b": "Mitigation efforts are balanced against economic costs, acknowledging that zero risk is practically impossible.",
@@ -232,6 +261,7 @@
     "correct": "b"
   },
   {
+    "id": "q30",
     "question": "During a massive urban flood in Chennai, the state control room is receiving 10,000 distress calls per hour, rescue boats are stranded due to blocked roads, and the central communication server crashes. The situation has transitioned from a disaster response operation into a:",
     "a": "Mitigation phase",
     "b": "Capacity building exercise",
