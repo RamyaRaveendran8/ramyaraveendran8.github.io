@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Class Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        
+        button { width: 100%; padding: 15px; background-color: #0056b3; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+        button:hover { background-color: #004494; }
+        
+        .option-btn { 
+            background-color: #e9ecef !important; 
+            color: #333 !important; 
+            text-align: left; 
+            border: 2px solid transparent; 
+            -webkit-tap-highlight-color: transparent; 
+            outline: none; 
+        }
+        
+        @media (hover: hover) {
+            .option-btn:hover { background-color: #d3d9df !important; }
+        }
+        
+        .option-btn:active { background-color: #d3d9df !important; }
+        .option-btn:focus { outline: none; }
+        
+        .option-btn.selected, .option-btn.selected:hover { 
+            background-color: lightcyan !important; 
+            color: #333 !important; 
+            border: 2px solid #00acc1 !important; 
+        }
+
+        #next-btn { background-color: #28a745; margin-top: 15px; font-weight: bold; }
+        #next-btn:hover { background-color: #218838; }
+
+        #timer-display { font-size: 24px; font-weight: bold; color: #d9534f; text-align: center; margin-bottom: 15px; }
+        .hidden { display: none; }
+        #question-text { font-size: 18px; font-weight: bold; margin-bottom: 20px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="login-screen">
+    <h2>Student Login</h2>
+    <p>Please enter your details to begin the quiz. The timer will start immediately.</p>
+    <input type="text" id="student-name" placeholder="Full Name" required>
+    <input type="text" id="student-id" placeholder="Student ID / Roll No." required>
+    <button onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<div class="container hidden" id="quiz-screen">
+    <div id="timer-display">Time: <span id="time-left">20</span>s</div>
+    <div id="question-text">Loading question...</div>
+    <button class="option-btn" id="btn-a" onclick="selectOption('a', 'btn-a')"></button>
+    <button class="option-btn" id="btn-b" onclick="selectOption('b', 'btn-b')"></button>
+    <button class="option-btn" id="btn-c" onclick="selectOption('c', 'btn-c')"></button>
+    <button class="option-btn" id="btn-d" onclick="selectOption('d', 'btn-d')"></button>
+    
+    <button id="next-btn" onclick="submitAnswerAndProceed()">Next</button>
+</div>
+
+<div class="container hidden" id="result-screen">
+    <h2>Quiz Complete</h2>
+    <p id="final-message">Submitting your score...</p>
+</div>
+
+<script>
+    // --- CONFIGURATION ---
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxHq77043opSQZfGMsoFlyhzqRm4xyTSY2ItsUSR-KSQYfiXJl3SZQ5YETImiy3DfKW/exec"; 
+    const TIME_PER_QUESTION = 20; 
+
+    // --- VARIABLES ---
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let timerInterval;
+    let studentData = {};
+    let quizId = "unknown_quiz";
+    let selectedAnswer = null; 
+    let itemScorecard = {}; // Tracks 1s and 0s for each question ID
+
+    // --- INITIALIZATION ---
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const idFromUrl = urlParams.get('id');
+        
+        if (!idFromUrl) {
+            alert("Error: No quiz ID found in the link. Please use the correct link.");
+            return;
+        }
+        quizId = idFromUrl;
+        
+        fetch(quizId + '.json')
+            .then(response => {
+                if (!response.ok) throw new Error("Could not find the question bank.");
+                return response.json();
+            })
+            .then(data => { questions = data; })
+            .catch(error => { alert("Error loading questions. Check your URL or JSON file name."); });
+    };
+
+    function startQuiz() {
+        const nameInput = document.getElementById('student-name').value.trim();
+        const idInput = document.getElementById('student-id').value.trim();
+
+        if (nameInput === "" || idInput === "") { alert("Please enter both Name and Student ID."); return; }
+        if (questions.length === 0) { alert("Questions are still loading. Please wait a moment."); return; }
+
+        studentData.name = nameInput;
+        studentData.studentId = idInput;
+
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('quiz-screen').classList.remove('hidden');
+
+        shuffleArray(questions);
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            finishQuiz();
+            return;
+        }
+
+        selectedAnswer = null;
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+            btn.blur(); 
+        });
+
+        const currentQ = questions[currentQuestionIndex];
+        document.getElementById('question-text').innerText = `Q${currentQuestionIndex + 1}: ${currentQ.question}`;
+        document.getElementById('btn-a').innerText = `A) ${currentQ.a}`;
+        document.getElementById('btn-b').innerText = `B) ${currentQ.b}`;
+        document.getElementById('btn-c').innerText = `C) ${currentQ.c}`;
+        document.getElementById('btn-d').innerText = `D) ${currentQ.d}`;
+
+        if (currentQuestionIndex === questions.length - 1) {
+            document.getElementById('next-btn').innerText = "Finish";
+        } else {
+            document.getElementById('next-btn').innerText = "Next";
+        }
+
+        startTimer();
+    }
+
+    function startTimer() {
+        let timeLeft = TIME_PER_QUESTION;
+        document.getElementById('time-left').innerText = timeLeft;
+        
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById('time-left').innerText = timeLeft;
+            if (timeLeft <= 0) {
+                submitAnswerAndProceed();
+            }
+        }, 1000);
+    }
+
+    function selectOption(letter, btnId) {
+        selectedAnswer = letter;
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        document.getElementById(btnId).classList.add('selected');
+    }
+
+    function submitAnswerAndProceed() {
+        clearInterval(timerInterval); 
+        
+        const currentQ = questions[currentQuestionIndex];
+        let isCorrect = 0;
+
+        if (selectedAnswer !== null) {
+            if (selectedAnswer === currentQ.correct) {
+                score++;
+                isCorrect = 1;
+            }
+        }
+        
+        // Record the 1 or 0 against the unique question ID
+        if (currentQ.id) {
+            itemScorecard[currentQ.id] = isCorrect;
+        }
+        
+        currentQuestionIndex++;
+        loadQuestion();
+    }
+
+    function finishQuiz() {
+        document.getElementById('quiz-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        // Include the scorecard in the payload sent to Google
+        const payload = { 
+            quizId: quizId, 
+            name: studentData.name, 
+            studentId: studentData.studentId, 
+            score: score,
+            itemAnalysis: itemScorecard 
+        };
+
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(payload)
+        }).then(() => {
+            document.getElementById('final-message').innerText = `Your score of ${score}/${questions.length} has been successfully submitted. You may close this window.`;
+        }).catch(error => {
+            document.getElementById('final-message').innerText = `An error occurred while submitting. Please tell your instructor. Score: ${score}/${questions.length}`;
+        });
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // --- ANTI-CHEAT MECHANISM ---
+    document.addEventListener("visibilitychange", () => {
+        const quizActive = !document.getElementById('quiz-screen').classList.contains('hidden');
+        
+        if (document.hidden && quizActive) {
+            clearInterval(timerInterval); 
+            
+            document.getElementById('final-message').innerText = 
+                "Violation Detected: You left the quiz window. Your test has been cancelled and your partial score of " + score + "/" + questions.length + " has been submitted.";
+            
+            finishQuiz();
+        }
+    });
+</script>
+
+</body>
+</html>
